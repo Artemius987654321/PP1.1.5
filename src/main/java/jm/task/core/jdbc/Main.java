@@ -12,7 +12,7 @@ public class Main {
         Util.getConnection();
         UserDao userDao = new UserDaoJDBCImpl();
         userDao.createUsersTable();
-        userDao.saveUser("ARTEM", "LAZAREV" , (byte) 24);
+        userDao.saveUser("BFSAG", "GFfADGH" , (byte) 23);
 //        userDao.removeUserById(1);
 //        userDao.getAllUsers();
 //        userDao.cleanUsersTable();

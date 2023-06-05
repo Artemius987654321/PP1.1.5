@@ -25,8 +25,6 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();
-        } finally {
-            connection.setAutoCommit(true);
         }
     }
 
@@ -39,37 +37,31 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();
-        } finally {
-            connection.setAutoCommit(true);
         }
     }
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {
         String FormatRequest = "INSERT INTO users (name, lastName, age) VALUES ('%s', '%s', (%d))";
         String request = String.format(FormatRequest, name, lastName, age);
-        try (Statement statement = connection.createStatement()) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(request)) {
             connection.setAutoCommit(false);
-            statement.executeUpdate(request);
+            preparedStatement.executeUpdate(request);
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();
-        } finally {
-            connection.setAutoCommit(true);
         }
     }
 
     public void removeUserById(long id) throws SQLException {
         String request = "DELETE FROM users WHERE id = " + id + " LIMIT 1 ";
-        try (Statement statement = connection.createStatement()) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(request)) {
             connection.setAutoCommit(false);
-            statement.execute(request);
+            preparedStatement.execute(request);
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();
-        } finally {
-            connection.setAutoCommit(true);
         }
     }
 
@@ -86,8 +78,6 @@ public class UserDaoJDBCImpl implements UserDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connection.setAutoCommit(true);
         }
         return userList;
     }
@@ -101,8 +91,6 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();
-        } finally {
-            connection.setAutoCommit(true);
         }
     }
 }
