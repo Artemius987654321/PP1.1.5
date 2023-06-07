@@ -6,8 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="TaskJDBC" />
+        <module name="hibernate-tutorial" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hibernate-java-config-example" target="1.5" />
+      <module name="TaskJDBC" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
